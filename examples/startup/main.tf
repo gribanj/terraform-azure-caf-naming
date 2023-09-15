@@ -7,7 +7,7 @@ locals {
 }
 
 module "naming" {
-  source = ".//modules//azurecaf_name"
+  source = "../../"
   settings = {
     rg_config = {
       resource_type = "azurerm_resource_group"

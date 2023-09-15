@@ -1,5 +1,11 @@
+variable "name" {
+  description = "Name of the resource"
+  type        = string
+  default     = "workload"
+}
+
 variable "settings" {
-  description = "Configurations for Azure resources"
+  description = "nameurations for Azure resources"
   type = map(object({
     resource_type = string
     suffixes      = list(string)
@@ -13,8 +19,35 @@ variable "settings" {
     vnet_config = {
       resource_type = "azurerm_virtual_network"
       suffixes      = ["suffix1", "suffix2"]
-    }
+    },
+    snet_config = {
+      resource_type = "azurerm_subnet"
+      suffixes      = ["suffix1", "suffix2"]
+    },
+    nsg_config = {
+      resource_type = "azurerm_network_security_group"
+      suffixes      = ["suffix1", "suffix2"]
+    },
+    nsgr_config = {
+      resource_type = "azurerm_network_security_rule"
+      suffixes      = ["suffix1", "suffix2"]
+    },
+    avail_config = {
+      resource_type = "azurerm_availability_set"
+      suffixes      = ["suffix1", "suffix2"]
+    },
+    pip_config = {
+      resource_type = "azurerm_public_ip"
+      suffixes      = ["suffix1", "suffix2"]
+    },
+    nic_config = {
+      resource_type = "azurerm_network_interface"
+      suffixes      = ["suffix1", "suffix2"]
+    },
+    aks_config = {
+      resource_type = "azurerm_kubernetes_cluster"
+      suffixes      = ["suffix1", "suffix2"]
+    },
     # Add more resources as needed
   }
 }
-
