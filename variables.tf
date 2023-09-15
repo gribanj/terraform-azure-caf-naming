@@ -12,39 +12,39 @@ variable "settings" {
   }))
 
   default = {
-    rg_config = {
+    rg_name = {
       resource_type = "azurerm_resource_group"
       suffixes      = ["suffix1", "suffix2"]
     },
-    vnet_config = {
+    vnet_name = {
       resource_type = "azurerm_virtual_network"
       suffixes      = ["suffix1", "suffix2"]
     },
-    snet_config = {
+    snet_name = {
       resource_type = "azurerm_subnet"
       suffixes      = ["suffix1", "suffix2"]
     },
-    nsg_config = {
+    nsg_name = {
       resource_type = "azurerm_network_security_group"
       suffixes      = ["suffix1", "suffix2"]
     },
-    nsgr_config = {
+    nsgr_name = {
       resource_type = "azurerm_network_security_rule"
       suffixes      = ["suffix1", "suffix2"]
     },
-    avail_config = {
+    avail_name = {
       resource_type = "azurerm_availability_set"
       suffixes      = ["suffix1", "suffix2"]
     },
-    pip_config = {
+    pip_name = {
       resource_type = "azurerm_public_ip"
       suffixes      = ["suffix1", "suffix2"]
     },
-    nic_config = {
+    nic_name = {
       resource_type = "azurerm_network_interface"
       suffixes      = ["suffix1", "suffix2"]
     },
-    aks_config = {
+    aks_name = {
       resource_type = "azurerm_kubernetes_cluster"
       suffixes      = ["suffix1", "suffix2"]
     },
