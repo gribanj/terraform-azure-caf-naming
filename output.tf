@@ -5,5 +5,5 @@ output "name_outputs" {
 
 /*
 e.g.
-  module.naming.name_outputs["rg_config"]
+  module.naming.name_outputs["rg_name"]
 */
