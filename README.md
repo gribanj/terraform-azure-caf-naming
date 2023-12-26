@@ -2,8 +2,6 @@
 ## Requirements
 // https://github.com/aztfmod/terraform-provider-azurecaf/blob/main/docs/resources/azurecaf_name.md
 
-// EXAMPLE:  module.naming.name_outputs["log"]
-
 🏗️ Resource: Azure Naming Conventions Module (caf-naming/azure)
 Implements a standardized naming approach across Azure resources, enhancing management, clarity, and consistency. This module generates structured, predictable names for various Azure resources, crucial for large-scale infrastructures and multi-environment setups.
 - 'rg', 'vnet', 'snet', etc.: Defines the resource types with their respective naming conventions.
@@ -36,7 +34,10 @@ vnet = { /* ... */ },
 }
 }
 ```
+```hcl
 # Exampels:
+// EXAMPLE:  module.naming.name_outputs["log"]
+
   name = join("", [
     substr(module.naming.name_outputs["rg"], 0, 3),                                           # Extract 'rg-'
     local.additional_suffix,                                                                  # Insert '-monitor'
@@ -54,7 +55,7 @@ locals {
   st_name = replace(module.naming.name_outputs["st"], "st", "st${local.additional_suffix}")
 }
 }
-
+```
 💡 Tips & Enhancements:
 - Dynamic Suffix Usage: Leverage Terraform functions like substr and replace for dynamic naming patterns.
 - Resource Identification: Utilize emojis 🌐 for networking, 🔒 for security, etc., to categorize resource types.
