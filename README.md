@@ -1,6 +1,65 @@
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
+// https://github.com/aztfmod/terraform-provider-azurecaf/blob/main/docs/resources/azurecaf_name.md
 
+// EXAMPLE:  module.naming.name_outputs["log"]
+
+🏗️ Resource: Azure Naming Conventions Module (caf-naming/azure)
+Implements a standardized naming approach across Azure resources, enhancing management, clarity, and consistency. This module generates structured, predictable names for various Azure resources, crucial for large-scale infrastructures and multi-environment setups.
+- 'rg', 'vnet', 'snet', etc.: Defines the resource types with their respective naming conventions.
+- 'suffixes': Adds specific suffixes like environment or version to the resource names for better differentiation and management.
+- 'resource_type': Specifies the Azure resource type, ensuring each resource has a distinct and recognizable name.
+- 'name': A base name to prepend to all resources, providing an initial layer of customization.
+🎯 Purpose & Benefits:
+- Uniformity & Clarity: Ensures consistency in naming across Azure, aiding in resource identification and management.
+- Flexibility: Easily adaptable to different environments, versions, or custom requirements.
+- Automation-Friendly: Ideal for automation and large-scale deployments, reducing manual naming errors.
+🛠️ Use Cases:
+- Multi-Environment Management: Differentiate resources across various environments like 'dev', 'stg', 'prod'.
+- Version Control: Append version information to resources for easy tracking.
+📚 Documentation & Examples:
+- AzureCAF Naming Provider Documentation
+- Example Usage:
+```hcl
+locals {
+suffix1 = "v5"
+suffix2 = "dev"
+}
+module "naming" {
+source = "gribanj/caf-naming/azure"
+version = "0.1.0"
+name = "stack" # Base name
+settings = {
+rg = { resource_type = "azurerm_resource_group", suffixes = [local.suffix1, local.suffix2] },
+vnet = { /* ... */ },
+// Add other resources as needed
+}
+}
+```
+# Exampels:
+  name = join("", [
+    substr(module.naming.name_outputs["rg"], 0, 3),                                           # Extract 'rg-'
+    local.additional_suffix,                                                                  # Insert '-monitor'
+    substr(module.naming.name_outputs["rg"], 3, length(module.naming.name_outputs["rg"]) - 3) # Rest of the original string
+  ])
+  or  locals {
+  additional_suffix = "mon"
+  st_name           = replace(module.naming.name_outputs["st"], "st", "st${local.additional_suffix}")
+  rg_name           = replace(module.naming.name_outputs["rg"], "rg-", "rg-${local.additional_suffix}-")
+
+
+Example of dynamic naming for a storage account
+locals {
+  additional_suffix = "mon"
+  st_name = replace(module.naming.name_outputs["st"], "st", "st${local.additional_suffix}")
+}
+}
+
+💡 Tips & Enhancements:
+- Dynamic Suffix Usage: Leverage Terraform functions like substr and replace for dynamic naming patterns.
+- Resource Identification: Utilize emojis 🌐 for networking, 🔒 for security, etc., to categorize resource types.
+- Consistency in Tags: Maintain a consistent tagging strategy across resources, including creation dates, environment identifiers, and other metadata.
+==============================================================
 No requirements.
 
 ## Providers
